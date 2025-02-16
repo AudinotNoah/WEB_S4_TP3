@@ -1,6 +1,6 @@
 import { cart } from "./cart.js";
 
-function displayProduct(product) {
+function displayProduct(product, addToCartHandler) {
     const productDiv = document.createElement("div");
     productDiv.classList.add("product");
 
@@ -23,19 +23,16 @@ function displayProduct(product) {
     `;
 
     const addButton = productDiv.querySelector(".product-add2cart");
-    addButton.addEventListener("click", () => {
-        cart.addToCart(product);
-        displayCart();
-    });
+    addButton.addEventListener("click", () => addToCartHandler(product));
 
     return productDiv;
 }
 
-function buildProductsList(productsArray) {
+function buildProductsList(productsArray, addToCartHandler) {
     const productList = document.getElementById("product-list");
     productList.innerHTML = "";
     productsArray.forEach(product => {
-        productList.appendChild(displayProduct(product));
+        productList.appendChild(displayProduct(product, addToCartHandler));
     });
 }
 

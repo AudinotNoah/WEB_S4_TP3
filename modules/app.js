@@ -2,6 +2,11 @@ import { products, search } from "./products.js";
 import { buildProductsList, displayCart } from "./ui.js";
 import { cart } from "./cart.js";
 
+function addToCartHandler(product) {
+    cart.addToCart(product);
+    displayCart();
+}
+
 function init() {
     buildProductsList(products);
 
@@ -14,6 +19,8 @@ function init() {
             buildProductsList(results);
         }
     });
+
+    buildProductsList(products, addToCartHandler);
 
     const emptyCartButton = document.getElementById("empty-cart");
     emptyCartButton.addEventListener("click", () => {
