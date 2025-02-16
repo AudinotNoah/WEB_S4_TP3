@@ -1,4 +1,4 @@
-import { products } from "./products.js";
+import { cart } from "./cart.js";
 
 function displayProduct(product) {
     const productDiv = document.createElement("div");
@@ -21,6 +21,12 @@ function displayProduct(product) {
             </div>
         </div>
     `;
+
+    const addButton = productDiv.querySelector(".product-add2cart");
+    addButton.addEventListener("click", () => {
+        cart.addToCart(product);
+        console.log(cart.items); // debug
+    });
 
     return productDiv;
 }
