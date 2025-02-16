@@ -1,4 +1,3 @@
-
 class Product {
     constructor(ref, price, description) {
         this.ref = ref;
@@ -13,4 +12,11 @@ const products = [
     new Product("P003", 39.99, "Produit 3 - article de prestige"),
 ];
 
-export { products };
+function search(keywords) {
+    return products.filter(product =>
+        product.ref.toLowerCase().includes(keywords.toLowerCase()) ||
+        product.description.toLowerCase().includes(keywords.toLowerCase())
+    );
+}
+
+export { products, search };
