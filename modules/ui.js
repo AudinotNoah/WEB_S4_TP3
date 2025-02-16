@@ -25,7 +25,6 @@ function displayProduct(product) {
     const addButton = productDiv.querySelector(".product-add2cart");
     addButton.addEventListener("click", () => {
         cart.addToCart(product);
-        console.log(cart.items); // debug
         displayCart();
     });
 

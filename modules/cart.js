@@ -1,3 +1,5 @@
+// modules/cart.js
+
 class Cart {
     constructor() {
         this.items = [];
@@ -10,6 +12,10 @@ class Cart {
         } else {
             this.items.push({ product, qty: 1 });
         }
+    }
+
+    emptyCart() {
+        this.items = [];
     }
 }
 
