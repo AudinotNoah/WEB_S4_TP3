@@ -6,7 +6,7 @@ function displayProduct(product, addToCartHandler) {
 
     productDiv.innerHTML = `
         <div class="photo">
-            picto
+            <img src="${product.photo}" alt="${product.ref}">
             <a class="product-add2cart">
                 <span class="mdi mdi-cart"></span>
             </a>
