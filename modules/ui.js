@@ -39,4 +39,26 @@ function buildProductsList(productsArray) {
     });
 }
 
-export { buildProductsList };
+function displayCart() {
+    const cartContent = document.getElementById("cart-content");
+    const totalProductsSpan = document.getElementById("total-products");
+    const cartTotalSpan = document.getElementById("cart-total");
+
+    const cartItemsHtml = cart.items
+        .map(item => `
+            <tr>
+                <td>${item.product.ref}</td>
+                <td>${item.qty}</td>
+                <td>${(item.product.price * item.qty).toFixed(2)} €</td>
+            </tr>
+        `)
+        .join(""); // join au lieu de reduce
+
+    cartContent.innerHTML = cartItemsHtml;
+
+    const totalPrice = cart.items.reduce((total, item) => total + (item.product.price * item.qty), 0);
+    cartTotalSpan.textContent = totalPrice.toFixed(2) + " €";
+    totalProductsSpan.textContent = cart.items.reduce((total, item) => total + item.qty, 0);
+}
+
+export { buildProductsList, displayCart  };
