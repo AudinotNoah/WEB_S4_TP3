@@ -1,0 +1,18 @@
+# Ignorer le dossier des dépendances Node.js
+node_modules/
+
+# Ignorer les fichiers générés par npm
+npm-debug.log*
+package-lock.json
+
+# Ignorer les fichiers de build
+out.js
+
+# Ignorer les fichiers temporaires du système
+.DS_Store
+Thumbs.db
+
+# Ignorer les fichiers de l'éditeur
+.vscode/
+.idea/
+*.swp
