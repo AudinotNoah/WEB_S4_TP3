@@ -26,6 +26,7 @@ function displayProduct(product) {
     addButton.addEventListener("click", () => {
         cart.addToCart(product);
         console.log(cart.items); // debug
+        displayCart();
     });
 
     return productDiv;
