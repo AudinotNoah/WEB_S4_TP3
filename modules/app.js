@@ -8,7 +8,8 @@ function addToCartHandler(product) {
 }
 
 function init() {
-    buildProductsList(products);
+    buildProductsList(products, addToCartHandler);
+    displayCart();
 
     const searchInput = document.getElementById("product-search");
 
@@ -19,8 +20,6 @@ function init() {
             buildProductsList(results);
         }
     });
-
-    buildProductsList(products, addToCartHandler);
 
     const emptyCartButton = document.getElementById("empty-cart");
     emptyCartButton.addEventListener("click", () => {

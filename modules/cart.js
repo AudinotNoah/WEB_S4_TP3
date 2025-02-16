@@ -1,8 +1,6 @@
-// modules/cart.js
-
 class Cart {
     constructor() {
-        this.items = [];
+        this.items = this.loadCart();
     }
 
     addToCart(product) {
@@ -12,10 +10,21 @@ class Cart {
         } else {
             this.items.push({ product, qty: 1 });
         }
+        this.saveCart();
     }
 
     emptyCart() {
         this.items = [];
+        this.saveCart();
+    }
+
+    saveCart() {
+        localStorage.setItem("cart", JSON.stringify(this.items));
+    }
+
+    loadCart() {
+        const savedCart = localStorage.getItem("cart");
+        return savedCart ? JSON.parse(savedCart) : [];
     }
 }
 
