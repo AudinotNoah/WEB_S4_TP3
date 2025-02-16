@@ -1,126 +1,23 @@
-(() => {
-  // modules/products.js
-  var Product = class {
-    constructor(ref, price, description, photo) {
-      this.ref = ref;
-      this.price = price;
-      this.description = description;
-      this.photo = photo;
-    }
-  };
-  var products = [
-    //https://placeimg.com) n'existe plus
-    new Product("P001", 19.99, "Produit 1 - article de base", "https://picsum.photos/100/100?random=1"),
-    new Product("P002", 29.99, "Produit 2 - article de luxe", "https://picsum.photos/100/100?random=2"),
-    new Product("P003", 39.99, "Produit 3 - article de prestige", "https://picsum.photos/100/100?random=3")
-  ];
-  function search(keywords) {
-    return products.filter(
-      (product) => product.ref.toLowerCase().includes(keywords.toLowerCase()) || product.description.toLowerCase().includes(keywords.toLowerCase())
-    );
-  }
-
-  // modules/cart.js
-  var Cart = class {
-    constructor() {
-      this.items = this.loadCart();
-    }
-    addToCart(product) {
-      const existingItem = this.items.find((item) => item.product.ref === product.ref);
-      if (existingItem) {
-        existingItem.qty++;
-      } else {
-        this.items.push({ product, qty: 1 });
-      }
-      this.saveCart();
-    }
-    emptyCart() {
-      this.items = [];
-      this.saveCart();
-    }
-    saveCart() {
-      localStorage.setItem("cart", JSON.stringify(this.items));
-    }
-    loadCart() {
-      const savedCart = localStorage.getItem("cart");
-      return savedCart ? JSON.parse(savedCart) : [];
-    }
-  };
-  var cart = new Cart();
-
-  // modules/ui.js
-  function displayProduct(product, addToCartHandler2) {
-    const productDiv = document.createElement("div");
-    productDiv.classList.add("product");
-    productDiv.innerHTML = `
+(()=>{var i=class{constructor(e,r,s,d){this.ref=e,this.price=r,this.description=s,this.photo=d}},p=[new i("P001",19.99,"Produit 1 - article de base","https://picsum.photos/100/100?random=1"),new i("P002",29.99,"Produit 2 - article de luxe","https://picsum.photos/100/100?random=2"),new i("P003",39.99,"Produit 3 - article de prestige","https://picsum.photos/100/100?random=3")];function m(t){return p.filter(e=>e.ref.toLowerCase().includes(t.toLowerCase())||e.description.toLowerCase().includes(t.toLowerCase()))}var l=class{constructor(){this.items=this.loadCart()}addToCart(e){let r=this.items.find(s=>s.product.ref===e.ref);r?r.qty++:this.items.push({product:e,qty:1}),this.saveCart()}emptyCart(){this.items=[],this.saveCart()}saveCart(){localStorage.setItem("cart",JSON.stringify(this.items))}loadCart(){let e=localStorage.getItem("cart");return e?JSON.parse(e):[]}},n=new l;function f(t,e){let r=document.createElement("div");return r.classList.add("product"),r.innerHTML=`
         <div class="photo">
-            <img src="${product.photo}" alt="${product.ref}">
+            <img src="${t.photo}" alt="${t.ref}">
             <a class="product-add2cart">
                 <span class="mdi mdi-cart"></span>
             </a>
         </div>
         <div class="details">
             <div class="details-top">
-                <strong class="bigger">${product.ref}</strong>
-                <strong class="bigger">${product.price} \u20AC</strong>
+                <strong class="bigger">${t.ref}</strong>
+                <strong class="bigger">${t.price} \u20AC</strong>
             </div>
             <div class="details-description">
-                ${product.description}
+                ${t.description}
             </div>
         </div>
-    `;
-    const addButton = productDiv.querySelector(".product-add2cart");
-    addButton.addEventListener("click", () => addToCartHandler2(product));
-    return productDiv;
-  }
-  function buildProductsList(productsArray, addToCartHandler2) {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = "";
-    productsArray.forEach((product) => {
-      productList.appendChild(displayProduct(product, addToCartHandler2));
-    });
-  }
-  function displayCart() {
-    const cartContent = document.getElementById("cart-content");
-    const totalProductsSpan = document.getElementById("total-products");
-    const cartTotalSpan = document.getElementById("cart-total");
-    const cartItemsHtml = cart.items.map((item) => `
+    `,r.querySelector(".product-add2cart").addEventListener("click",()=>e(t)),r}function u(t,e){let r=document.getElementById("product-list");r.innerHTML="",t.forEach(s=>{r.appendChild(f(s,e))})}function c(){let t=document.getElementById("cart-content"),e=document.getElementById("total-products"),r=document.getElementById("cart-total"),s=n.items.map(o=>`
             <tr>
-                <td>${item.product.ref}</td>
-                <td>${item.qty}</td>
-                <td>${(item.product.price * item.qty).toFixed(2)} \u20AC</td>
+                <td>${o.product.ref}</td>
+                <td>${o.qty}</td>
+                <td>${(o.product.price*o.qty).toFixed(2)} \u20AC</td>
             </tr>
-        `).join("");
-    cartContent.innerHTML = cartItemsHtml;
-    const totalPrice = cart.items.reduce((total, item) => total + item.product.price * item.qty, 0);
-    cartTotalSpan.textContent = totalPrice.toFixed(2) + " \u20AC";
-    totalProductsSpan.textContent = cart.items.reduce((total, item) => total + item.qty, 0);
-  }
-
-  // modules/app.js
-  function addToCartHandler(product) {
-    cart.addToCart(product);
-    displayCart();
-  }
-  function init() {
-    buildProductsList(products, addToCartHandler);
-    displayCart();
-    const searchInput = document.getElementById("product-search");
-    searchInput.addEventListener("keyup", (event) => {
-      if (event.key === "Enter") {
-        const results = search(searchInput.value);
-        buildProductsList(results);
-      }
-    });
-    const emptyCartButton = document.getElementById("empty-cart");
-    emptyCartButton.addEventListener("click", () => {
-      cart.emptyCart();
-      displayCart();
-    });
-  }
-
-  // modules/main.js
-  document.addEventListener("DOMContentLoaded", () => {
-    init();
-  });
-})();
+        `).join("");t.innerHTML=s;let d=n.items.reduce((o,a)=>o+a.product.price*a.qty,0);r.textContent=d.toFixed(2)+" \u20AC",e.textContent=n.items.reduce((o,a)=>o+a.qty,0)}function y(t){n.addToCart(t),c()}function h(){u(p,y),c();let t=document.getElementById("product-search");t.addEventListener("keyup",r=>{if(r.key==="Enter"){let s=m(t.value);u(s)}}),document.getElementById("empty-cart").addEventListener("click",()=>{n.emptyCart(),c()})}document.addEventListener("DOMContentLoaded",()=>{h()});})();

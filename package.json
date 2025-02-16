@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "esbuild": "^0.25.0"
+  },
+  "scripts": {
+    "build": "esbuild modules/main.js --bundle --minify --outfile=out.js"
   }
 }
