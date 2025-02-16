@@ -34,7 +34,10 @@ Ce projet est une simple application de panier d'achat construite avec HTML, CSS
     ```sh
     python -m http.server 8000
     ```
-3. Ouvrez `index.html` dans votre navigateur web pour voir l'application.
+3. Accédez à l'application en ouvrant votre navigateur et en allant à l'adresse :
+    ```sh
+    http://localhost:8000
+    ```
 
 ## Structure du Projet
 
