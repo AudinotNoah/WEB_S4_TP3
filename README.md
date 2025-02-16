@@ -17,7 +17,7 @@ Ce projet est une simple application de panier d'achat construite avec HTML, CSS
     ```
 2. Naviguez vers le répertoire du projet :
     ```sh
-    cd td3-shopping-cart
+    cd WEB_S4_TP3
     ```
 3. Installez les dépendances :
     ```sh
